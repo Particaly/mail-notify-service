@@ -4,6 +4,11 @@ FROM node:18-alpine
 # 设置工作目录
 WORKDIR /app
 
+# 安装 OpenSSL 1.1 和其他必要的系统依赖
+RUN apk add --no-cache \
+    openssl1.1-compat \
+    openssl-dev
+
 # 复制 package.json 和 package-lock.json
 COPY package*.json ./
 
@@ -17,7 +22,7 @@ COPY . .
 RUN npx prisma generate
 
 # 暴露端口
-EXPOSE 3000
+EXPOSE 3750
 
 # 启动命令
 CMD ["npm", "start"] 
