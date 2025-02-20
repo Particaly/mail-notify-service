@@ -23,7 +23,7 @@
 
 1. 克隆仓库并安装依赖：
 ```bash
-git clone https://github.com/yourusername/mail-notify-service.git
+git clone https://github.com/Particaly/mail-notify-service.git
 cd mail-notify-service
 npm install
 ```
@@ -68,6 +68,10 @@ npm start
 
 #### 使用 Docker
 ```bash
+git clone https://github.com/Particaly/mail-notify-service.git
+
+cd mail-notify-service
+
 docker-compose up -d
 ```
 
