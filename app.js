@@ -56,8 +56,10 @@ app.use(express.urlencoded({ extended: true }));
 // 认证中间件
 function requireAuth(req, res, next) {
   if (!req.session.userId) {
-    // API 请求返回 401，但排除所有 auth 相关接口
-    if (req.path.startsWith('/api/') && !req.path.startsWith('/api/auth/')) {
+    // API 请求返回 401，但排除 auth 相关接口和 webhook 触发接口
+    if (req.path.startsWith('/api/') && 
+        !req.path.startsWith('/api/auth/') && 
+        !req.path.match(/^\/api\/webhook\/.*\/trigger$/)) {
       return res.status(401).json({ success: false, error: '未登录或会话已过期' });
     }
     // 页面请求重定向到登录页
