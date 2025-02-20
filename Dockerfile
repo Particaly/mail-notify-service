@@ -19,6 +19,7 @@ COPY . .
 # 生成 Prisma Client
 RUN npx prisma generate
 
+RUN npx prisma migrate dev --name init
 # 暴露端口
 EXPOSE 3750
 
