@@ -1,0 +1,11 @@
+{
+  "email": {
+    "host": "smtp.qq.com",
+    "port": 465,
+    "secure": true,
+    "auth": {
+      "user": "your_qq_email@qq.com",
+      "pass": "your_authorization_code"
+    }
+  }
+} 

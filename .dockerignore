@@ -1,0 +1,38 @@
+# 版本控制
+.git
+.gitignore
+
+# 依赖
+node_modules
+npm-debug.log
+
+# 环境配置
+.env
+.env.*
+
+# 数据库
+prisma/dev.db
+prisma/dev.db-journal
+*.sqlite
+*.sqlite3
+
+# IDE
+.idea
+.vscode
+
+# 系统文件
+.DS_Store
+Thumbs.db
+
+# 日志
+logs
+*.log
+
+# 临时文件
+tmp
+temp
+
+# Docker 相关
+Dockerfile
+.dockerignore
+docker-compose.yml 

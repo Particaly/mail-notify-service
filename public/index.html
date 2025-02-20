@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Webhook邮件配置管理</title>
+    <link href="https://cdn.bootcdn.net/ajax/libs/twitter-bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .webhook-card {
+            margin-bottom: 1rem;
+        }
+        .form-group {
+            margin-bottom: 1rem;
+        }
+        .webhook-url {
+            font-family: monospace;
+            padding: 0.5rem;
+            background: #f8f9fa;
+            border-radius: 4px;
+            font-size: 0.9rem;
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        .webhook-url code {
+            word-break: break-all;
+        }
+        .copy-btn {
+            white-space: nowrap;
+            margin-left: 0.5rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="container mt-4">
+        <h2>Webhook邮件配置管理</h2>
+        
+        <!-- 添加新配置按钮 -->
+        <button class="btn btn-primary mb-4" onclick="showAddModal()">
+            添加新配置
+        </button>
+
+        <!-- Webhook列表 -->
+        <div id="webhookList" class="row">
+            <!-- 这里将通过JavaScript动态填充 -->
+        </div>
+
+        <!-- 添加/编辑Modal -->
+        <div class="modal fade" id="webhookModal" tabindex="-1">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="modalTitle">添加Webhook配置</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                    </div>
+                    <div class="modal-body">
+                        <form id="webhookForm">
+                            <input type="hidden" id="webhookId">
+                            <div class="form-group">
+                                <label for="name">配置名称</label>
+                                <input type="text" class="form-control" id="name" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="to">收件人</label>
+                                <input type="email" class="form-control" id="to" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="from">发件人</label>
+                                <input type="text" class="form-control" id="from" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="subject">邮件主题</label>
+                                <input type="text" class="form-control" id="subject" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="content">邮件内容</label>
+                                <textarea class="form-control" id="content" rows="4" required></textarea>
+                            </div>
+                            <div class="alert alert-info">
+                                <h6>模板变量使用说明：</h6>
+                                <p>可以使用以下模板变量获取请求中的值：</p>
+                                <ul>
+                                    <li><code>${headers.x-custom-header}</code> - 获取请求头的值</li>
+                                    <li><code>${query.name}</code> - 获取URL查询参数</li>
+                                    <li><code>${body.email}</code> - 获取请求体中的值</li>
+                                    <li><code>${params.id}</code> - 获取URL路径参数</li>
+                                </ul>
+                                <p>示例：发送给 <code>${body.email}</code> 的通知邮件</p>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">取消</button>
+                        <button type="button" class="btn btn-primary" onclick="saveWebhook()">保存</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 在 body 中添加 Toast 提示 -->
+    <div class="toast-container position-fixed bottom-0 end-0 p-3">
+        <div id="copyToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+            <div class="toast-header">
+                <strong class="me-auto">提示</strong>
+                <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+            </div>
+            <div class="toast-body">
+                链接已复制到剪贴板！
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.bootcdn.net/ajax/libs/twitter-bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+    <script src="js/main.js"></script>
+</body>
+</html> 
