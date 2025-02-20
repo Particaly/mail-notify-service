@@ -1,13 +1,49 @@
 const express = require('express');
 const session = require('express-session');
-const app = express();
-const port = 3000;
+const fs = require('fs');
+const path = require('path');
+const config = require('config');
 const webhookRoutes = require('./routes/webhook');
 const authRoutes = require('./routes/auth');
 
+// 检查并初始化配置文件
+function initConfig() {
+  const configPath = path.join(__dirname, 'config', 'default.json');
+  const examplePath = path.join(__dirname, 'config', 'default.example.json');
+
+  if (!fs.existsSync(configPath)) {
+    // 确保 config 目录存在
+    if (!fs.existsSync(path.dirname(configPath))) {
+      fs.mkdirSync(path.dirname(configPath), { recursive: true });
+    }
+    
+    // 复制示例配置文件
+    try {
+      fs.copyFileSync(examplePath, configPath);
+      console.log('已创建默认配置文件 config/default.json');
+      console.log('请修改配置文件中的邮箱设置后再启动服务');
+      process.exit(1);
+    } catch (error) {
+      console.error('创建配置文件失败:', error);
+      process.exit(1);
+    }
+  }
+}
+
+// 在应用启动前初始化配置
+initConfig();
+
+const app = express();
+const port = 3000;
+
+// 获取 session secret，如果未配置则使用默认值
+const sessionSecret = config.has('session.secret') 
+  ? config.get('session.secret') 
+  : 'default-secret-key-please-change-in-production';
+
 // 添加会话中间件
 app.use(session({
-  secret: 'your-secret-key',
+  secret: sessionSecret,
   resave: false,
   saveUninitialized: false
 }));
@@ -42,10 +78,9 @@ app.use(requireAuth);
 app.use('/api/webhook', webhookRoutes);
 app.use('/api/auth', authRoutes);
 
-// 示例路由
-app.get('/', (req, res) => {
-  res.send('欢迎使用Express!');
-});
+if (process.env.NODE_ENV === 'production' && sessionSecret === 'default-secret-key-please-change-in-production') {
+  console.warn('警告: 正在使用默认的 session secret。在生产环境中，请在 config/default.json 中设置自定义的 secret。');
+}
 
 // 启动服务器
 app.listen(port, () => {

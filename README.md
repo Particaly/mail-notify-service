@@ -134,15 +134,15 @@ docker-compose logs -f
 ```
 .
 ├── config/                 # 配置文件
-├── prisma/                # 数据库模型和迁移
-├── public/                # 静态文件
-│   ├── index.html        # 主页面
-│   ├── login.html        # 登录页面
-│   └── js/              # JavaScript 文件
-├── routes/                # 路由处理
-├── services/             # 业务逻辑
-├── app.js                # 应用入口
-└── package.json          # 项目配置
+├── prisma/                 # 数据库模型和迁移
+├── public/                 # 静态文件
+│   ├── index.html          # 主页面
+│   ├── login.html          # 登录页面
+│   └── js/                 # JavaScript 文件
+├── routes/                 # 路由处理
+├── services/               # 业务逻辑
+├── app.js                  # 应用入口
+└── package.json            # 项目配置
 ```
 
 ## 开发
