@@ -24,30 +24,33 @@
 1. 克隆仓库并安装依赖：
 ```bash
 git clone https://github.com/Particaly/mail-notify-service.git
+
 cd mail-notify-service
+
 npm install
 ```
 
 2. 配置邮件服务：
-   - 复制配置文件模板：
-   ```bash
-   cp config/default.example.json config/default.json
-   ```
-   - 编辑 `config/default.json`，填入你的 QQ 邮箱配置：
-   ```json
-   {
-     "email": {
-       "host": "smtp.qq.com",
-       "port": 465,
-       "secure": true,
-       "auth": {
-         "user": "your_qq_email@qq.com",
-         "pass": "your_authorization_code"
-       }
-     }
-   }
-   ```
-   > 注意：需要在 QQ 邮箱设置中开启 SMTP 服务并获取授权码
+
+复制配置文件模板：
+```bash
+cp config/default.example.json config/default.json
+```
+编辑 `config/default.json`，填入你的 QQ 邮箱配置：
+```json
+{
+  "email": {
+    "host": "smtp.qq.com",
+    "port": 465,
+    "secure": true,
+    "auth": {
+      "user": "your_qq_email@qq.com",
+      "pass": "your_authorization_code"
+    }
+  }
+}
+```
+> 注意：需要在 QQ 邮箱设置中开启 SMTP 服务并获取授权码
 
 3. 初始化数据库：
 ```bash
