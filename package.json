@@ -1,7 +1,14 @@
 {
-  "name": "express-project",
-  "version": "1.0.0",
-  "description": "Express项目",
+  "name": "mail-notify-service",
+  "version": "0.0.1",
+  "description": "一个基于 Webhook 的邮件通知服务",
+  "author": "J.S.Patrick",
+  "license": "MIT",
+  "homepage": "https://github.com/Particaly/mail-notify-service",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Particaly/mail-notify-service.git"
+  },
   "main": "app.js",
   "scripts": {
     "start": "node app.js",
