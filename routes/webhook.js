@@ -59,7 +59,7 @@ router.delete('/:id', async (req, res) => {
 });
 
 // 触发webhook发送邮件
-router.post('/:id/trigger', async (req, res) => {
+router.all('/:id/trigger', async (req, res) => {
   try {
     const id = req.params.id;
     const result = await emailService.sendEmail(id, req);
